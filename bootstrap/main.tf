@@ -1,0 +1,3 @@
+// main.tf
+// Resources are split into state-bucket.tf, iam.tf, wif.tf for clarity.
+// This file can remain minimal; Terraform loads all *.tf files in the directory.
