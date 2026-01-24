@@ -18,6 +18,7 @@ resource "google_iam_workload_identity_pool_provider" "github_actions" {
     "attribute.actor"    = "assertion.actor"
     "attribute.repository" = "assertion.repository"
     "attribute.ref"      = "assertion.ref"
+    "attribute.owner"        = "assertion.repository_owner"
   }
 
   attribute_condition = "attribute.owner == 'sysdev-se'"
