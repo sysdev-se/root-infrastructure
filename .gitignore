@@ -1,0 +1,35 @@
+# Terraform local state
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
+
+# Terraform directories
+.terraform/
+.terraform/*
+
+# Local variable files (keep tfvars.example if you create one)
+*.tfvars
+*.tfvars.json
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# IDE/editor
+# IntelliJ / IDEA
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# macOS / Linux
+.DS_Store
+Thumbs.db
