@@ -4,6 +4,12 @@ resource "google_service_account" "tf_org_admin" {
   project      = var.bootstrap_project_id
 }
 
+resource "google_project_iam_member" "tf_org_admin_project_editor" {
+  project = var.bootstrap_project_id
+  role    = "roles/editor"
+  member  = "serviceAccount:${google_service_account.tf_org_admin.email}"
+}
+
 resource "google_organization_iam_member" "tf_org_admin_project_creator" {
   org_id = var.org_id
   role   = "roles/resourcemanager.projectCreator"
@@ -22,8 +28,8 @@ resource "google_billing_account_iam_member" "tf_org_admin_billing_user" {
   member             = "serviceAccount:${google_service_account.tf_org_admin.email}"
 }
 
-resource "google_storage_bucket_iam_member" "tf_state_admin" {
-  bucket = google_storage_bucket.tf_state.name
-  role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${google_service_account.tf_org_admin.email}"
+resource "google_project_iam_member" "tf_org_admin_wif_admin" {
+  project = var.bootstrap_project_id
+  role    = "roles/iam.workloadIdentityPoolAdmin"
+  member  = "serviceAccount:${google_service_account.tf_org_admin.email}"
 }
