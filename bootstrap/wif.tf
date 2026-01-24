@@ -36,7 +36,6 @@ resource "google_service_account_iam_member" "tf_org_admin_wif_bindings" {
 
   service_account_id = google_service_account.tf_org_admin.name
   role               = "roles/iam.workloadIdentityUser"
-
   member = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/${each.value}"
 }
 
