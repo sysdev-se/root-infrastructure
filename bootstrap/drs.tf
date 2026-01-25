@@ -20,7 +20,7 @@ resource "google_org_policy_policy" "domain_restricted_sharing" {
 
       values {
         allowed_values = [
-          "under:organizations/${var.org_id}",
+          "is:principalSet://cloudresourcemanager.googleapis.com/organizations/${var.org_id}",
         ]
       }
     }
