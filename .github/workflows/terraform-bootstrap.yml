@@ -53,8 +53,12 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           set +e
-          terraform init -input=false
           terraform import \
+           -var="bootstrap_project_id=${{ secrets.TF_BOOTSTRAP_PROJECT_ID }}" \
+           -var="org_id=${{ secrets.TF_ORG_ID }}" \
+            -var="billing_account_id=${{ secrets.TF_BILLING_ACCOUNT_ID }}" \
+            -var="github_org=${{ secrets.TF_GITHUB_ORG }}" \
+            -var='infra_repos=${{ secrets.TF_INFRA_REPOS }}' \
             google_org_policy_policy.domain_restricted_sharing \
             "organizations/${{ secrets.TF_ORG_ID }}/policies/iam.allowedPolicyMemberDomains"
           exit 0
