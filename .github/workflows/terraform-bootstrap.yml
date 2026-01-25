@@ -54,8 +54,8 @@ jobs:
         run: |
           set +e
           terraform import \
-           -var="bootstrap_project_id=${{ secrets.TF_BOOTSTRAP_PROJECT_ID }}" \
-           -var="org_id=${{ secrets.TF_ORG_ID }}" \
+            -var="bootstrap_project_id=${{ secrets.TF_BOOTSTRAP_PROJECT_ID }}" \
+            -var="org_id=${{ secrets.TF_ORG_ID }}" \
             -var="billing_account_id=${{ secrets.TF_BILLING_ACCOUNT_ID }}" \
             -var="github_org=${{ secrets.TF_GITHUB_ORG }}" \
             -var='infra_repos=${{ secrets.TF_INFRA_REPOS }}' \
