@@ -15,3 +15,9 @@ resource "google_project_iam_member" "tf_org_admin_wif_admin" {
   role    = "roles/iam.workloadIdentityPoolAdmin"
   member  = "serviceAccount:${google_service_account.tf_org_admin.email}"
 }
+
+resource "google_organization_iam_member" "tf_org_admin_tag_admin" {
+  org_id = var.org_id
+  role   = "roles/resourcemanager.tagAdmin"
+  member = "serviceAccount:${google_service_account.tf_org_admin.email}"
+}
