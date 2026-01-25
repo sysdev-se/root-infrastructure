@@ -1,5 +1,5 @@
 resource "google_org_policy_policy" "domain_restricted_sharing" {
-  name   = "organizations/${var.org_id}/policies/iam.allowedPolicyMemberDomains"
+  name   = "organizations/${var.org_id}/policies/iam.managed.allowedPolicyMembers"
   parent = "organizations/${var.org_id}"
 
   spec {
@@ -9,7 +9,7 @@ resource "google_org_policy_policy" "domain_restricted_sharing" {
         title      = "Allow all identities for tagged resources"
       }
 
-      allow_all = true
+      enforce = false
     }
 
     rules {
@@ -18,9 +18,11 @@ resource "google_org_policy_policy" "domain_restricted_sharing" {
         title      = "Default DRS rule"
       }
 
-      values {
-        allowed_values = [
-          "is:principalSet://cloudresourcemanager.googleapis.com/organizations/${var.org_id}",
+      enforce = true
+
+      parameters {
+        allowed_principal_sets = [
+          "principalSet://cloudresourcemanager.googleapis.com/organizations/${var.org_id}",
         ]
       }
     }
