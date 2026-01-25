@@ -49,6 +49,16 @@ jobs:
             -var="github_org=${{ secrets.TF_GITHUB_ORG }}" \
             -var='infra_repos=${{ secrets.TF_INFRA_REPOS }}'
 
+      - name: Terraform Import org policy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          set +e
+          terraform init -input=false
+          terraform import \
+            google_org_policy_policy.domain_restricted_sharing \
+            "organizations/${{ secrets.TF_ORG_ID }}/policies/iam.allowedPolicyMemberDomains"
+          exit 0
+
       - name: Terraform Apply
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
