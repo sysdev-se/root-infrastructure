@@ -1,7 +1,7 @@
 resource "google_service_account" "tf_org_admin" {
+  project      = var.bootstrap_project_id
   account_id   = "tf-org-admin"
   display_name = "Terraform Org Admin / Project Creator"
-  project      = var.bootstrap_project_id
 }
 
 resource "google_project_iam_member" "tf_org_admin_project_editor" {
@@ -19,5 +19,17 @@ resource "google_project_iam_member" "tf_org_admin_wif_admin" {
 resource "google_organization_iam_member" "tf_org_admin_tag_admin" {
   org_id = var.org_id
   role   = "roles/resourcemanager.tagAdmin"
+  member = "serviceAccount:${google_service_account.tf_org_admin.email}"
+}
+// New lines below
+resource "google_organization_iam_member" "tf_org_admin_tag_user" {
+  org_id = var.org_id
+  role   = "roles/resourcemanager.tagUser"
+  member = "serviceAccount:${google_service_account.tf_org_admin.email}"
+}
+
+resource "google_organization_iam_member" "tf_org_admin_run_admin_org" {
+  org_id = var.org_id
+  role   = "roles/run.admin"
   member = "serviceAccount:${google_service_account.tf_org_admin.email}"
 }
