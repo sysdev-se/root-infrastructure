@@ -19,9 +19,7 @@ resource "google_org_policy_policy" "domain_restricted_sharing" {
       }
 
       values {
-        allowed_values = [
-          "C01r8xmnz",
-        ]
+        allowed_values = [var.google_workspace_customer_id]
       }
     }
   }
