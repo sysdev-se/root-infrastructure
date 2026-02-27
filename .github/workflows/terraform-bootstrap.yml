@@ -59,4 +59,4 @@ jobs:
             -var="billing_account_id=${{ secrets.TF_BILLING_ACCOUNT_ID }}" \
             -var="github_org=${{ secrets.TF_GITHUB_ORG }}" \
             -var="infra_repos=${{ secrets.TF_INFRA_REPOS }}" \
-            -var=google_workspace_customer_id=${{ secrets.GOOGLE_WORKSPACE_CUSTOMER_ID}}"
+            -var="google_workspace_customer_id=${{ secrets.GOOGLE_WORKSPACE_CUSTOMER_ID}}"
