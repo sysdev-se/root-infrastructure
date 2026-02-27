@@ -1,6 +1,6 @@
-variable "bootstrap_project_id" {
-  type        = string
-  description = "ID of the manually created bootstrap project (e.g. sysdev-bootstrap)."
+variable "google_workspace_customer_id" {
+  description = "The google workspace customer id"
+  type = string
 }
 
 variable "org_id" {
@@ -8,14 +8,14 @@ variable "org_id" {
   description = "Numeric organization ID."
 }
 
-variable "google_workspace_customer_id" {
-  description = "The google workspace customer id"
-  type = string
-}
-
 variable "billing_account_id" {
   type        = string
   description = "Billing account ID (XXXXXX-XXXXXX-XXXXXX)."
+}
+
+variable "bootstrap_project_id" {
+  type        = string
+  description = "ID of the manually created bootstrap project (e.g. sysdev-bootstrap)."
 }
 
 variable "default_region" {
