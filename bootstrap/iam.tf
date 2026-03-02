@@ -10,6 +10,12 @@ resource "google_project_iam_member" "tf_org_admin_project_editor" {
   member  = "serviceAccount:${google_service_account.tf_org_admin.email}"
 }
 
+resource "google_project_iam_member" "tf_org_admin_artifact_registry_writer_dev" {
+  project = "procv-dev-000001"
+  role    = "roles/artifactregistry.writer"
+  member  = "serviceAccount:${google_service_account.tf_org_admin.email}"
+}
+
 resource "google_project_iam_member" "tf_org_admin_wif_admin" {
   project = var.bootstrap_project_id
   role    = "roles/iam.workloadIdentityPoolAdmin"
