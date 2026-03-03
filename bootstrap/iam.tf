@@ -4,12 +4,6 @@ resource "google_service_account" "tf_org_admin" {
   display_name = "Terraform Org Admin / Project Creator"
 }
 
-resource "google_project_iam_member" "tf_org_admin_sa_admin" {
-  project = var.bootstrap_project_id
-  role    = "roles/iam.serviceAccountAdmin"
-  member  = "serviceAccount:${google_service_account.tf_org_admin.email}"
-}
-
 resource "google_project_iam_member" "tf_org_admin_project_editor" {
   project = var.bootstrap_project_id
   role    = "roles/editor"
