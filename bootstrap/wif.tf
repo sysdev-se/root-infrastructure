@@ -31,7 +31,6 @@ locals {
   ]
 }
 
-// trigger update
 resource "google_service_account_iam_member" "tf_org_admin_wif_bindings" {
   for_each = toset(local.allowed_repos)
 
