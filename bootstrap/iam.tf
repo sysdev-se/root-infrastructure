@@ -27,7 +27,7 @@ resource "google_organization_iam_member" "tf_org_admin_tag_admin" {
   role   = "roles/resourcemanager.tagAdmin"
   member = "serviceAccount:${google_service_account.tf_org_admin.email}"
 }
-// New lines below
+
 resource "google_organization_iam_member" "tf_org_admin_tag_user" {
   org_id = var.org_id
   role   = "roles/resourcemanager.tagUser"
