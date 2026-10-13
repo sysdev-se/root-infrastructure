@@ -9,7 +9,7 @@ resource "google_org_policy_policy" "domain_restricted_sharing" {
         title      = "Allow all identities for tagged resources"
       }
 
-      allow_all = true
+      allow_all = "TRUE"
     }
 
     rules {
