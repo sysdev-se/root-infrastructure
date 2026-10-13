@@ -14,8 +14,11 @@ resource "google_storage_bucket" "tf_state" {
     action {
       type = "Delete"
     }
+    # Only prune old noncurrent versions; live state files must never expire.
     condition {
-      age = 365
+      days_since_noncurrent_time = 365
     }
   }
+
+  depends_on = [google_project_iam_member.tf_org_admin_storage_admin]
 }

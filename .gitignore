@@ -33,3 +33,5 @@ override.tf.json
 # macOS / Linux
 .DS_Store
 Thumbs.db
+
+.agents

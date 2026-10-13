@@ -14,11 +14,11 @@ resource "google_iam_workload_identity_pool_provider" "github_actions" {
   }
 
   attribute_mapping = {
-    "google.subject"     = "assertion.sub"
-    "attribute.actor"    = "assertion.actor"
+    "google.subject"       = "assertion.sub"
+    "attribute.actor"      = "assertion.actor"
     "attribute.repository" = "assertion.repository"
-    "attribute.ref"      = "assertion.ref"
-    "attribute.owner"        = "assertion.repository_owner"
+    "attribute.ref"        = "assertion.ref"
+    "attribute.owner"      = "assertion.repository_owner"
   }
 
   attribute_condition = "attribute.owner == 'sysdev-se'"
@@ -35,8 +35,8 @@ locals {
 resource "google_service_account_iam_member" "tf_org_admin_wif_bindings" {
   for_each = toset(local.allowed_repos)
 
-  service_account_id = google_service_account.tf_org_admin.name
+  service_account_id = data.google_service_account.tf_org_admin.name
   role               = "roles/iam.workloadIdentityUser"
-  member = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/${each.value}"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/${each.value}"
 }
 
