@@ -28,6 +28,17 @@ locals {
     for pair in setproduct(keys(local.systems), local.system_folder_roles) :
     "${pair[0]}/${pair[1]}" => { system = pair[0], role = pair[1] }
   }
+
+  # People who get roles/editor on every system folder, so they can use the
+  # console. Changes should still go through each system's infrastructure repo.
+  system_editors = [
+    "user:systemadmin@sysdev.se",
+  ]
+
+  system_editor_bindings = {
+    for pair in setproduct(keys(local.systems), local.system_editors) :
+    "${pair[0]}/${pair[1]}" => { system = pair[0], member = pair[1] }
+  }
 }
 
 resource "google_folder" "system" {
@@ -51,6 +62,14 @@ resource "google_folder_iam_member" "system_terraform" {
   folder = google_folder.system[each.value.system].name
   role   = each.value.role
   member = "serviceAccount:${google_service_account.system_terraform[each.value.system].email}"
+}
+
+resource "google_folder_iam_member" "system_editor" {
+  for_each = local.system_editor_bindings
+
+  folder = google_folder.system[each.value.system].name
+  role   = "roles/editor"
+  member = each.value.member
 }
 
 # Lets the system link its projects to billing. Granted on the org because
